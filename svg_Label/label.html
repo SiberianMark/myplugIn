@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>labels</title>
+	<script src="./jquery-2.1.0.js"></script>
+	<!-- <script src="./snap.svg-min.js"></script> -->
+	<script src="./svg.js"></script>
+	
+</head>
+<body>
+	<!-- 1.插件开发三部曲，定义好插件静态结构容器 -->
+	<div id="data-note">
+		
+		<div class="img" id="imgsvg0" pic_labels="15255,125,dhdydd,hshsyshshsus...,djdhshshenei...,0.89537036,0.09206928,1,http://baidu.com,fggh,52,ggb,,,0.21666667,0.18140383,4,,sudhhdbdnusj...,25,ff,,,0.325,0.620784,2,http">
+			<img src="https://srctest.didi365.com/didi365/Upload/temp/20170109/note/20170109/587363d15fa0d_1029x1029.jpg" alt="">
+		</div>
+		<div class="img" id="imgsvg1" pic_labels="fggh,52,ggb,,,0.21666667,0.18140383,1,,sudhhdbdnusj...,25,ff,,,0.325,0.620784,2,http">
+			<img src="https://srctest.didi365.com/didi365/Upload/temp/20170109/note/20170109/587363d15fa0d_1029x1029.jpg" alt="">
+		</div>
+		<div class="img" id="imgsvg2" pic_labels="sudhhdbdnusj...,25,ff,,,0.325,0.620784,3,http">
+			<img src="https://srctest.didi365.com/didi365/Upload/temp/20170109/note/20170109/587363d15fa0d_1029x1029.jpg" alt="">
+		</div>
+	</div>
+	<!-- <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg">	</svg> -->
+</body>
+<script src="./labelSvg.js"></script>
+<script>
+	// 2.插件开发三部曲，分析需求获取插件功能定义好调用方式（接口）以及接口传入的可配置参数,一般是容器，数据结构，其他可配置项
+		for(var i=0;i<$('.img').length;i++){
+			if($('#imgsvg'+i).attr("pic_labels")!=""){
+				$('#imgsvg'+i).drawLabel({});
+			}
+			
+		}
+		
+	
+</script>
+</html>

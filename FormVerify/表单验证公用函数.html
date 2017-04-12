@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证公用函数</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    var ValidateRule={//验证规则
+        isEmpty:function(value,massage){
+            if(value===''){
+                console.log(massage);
+                return true;
+            }else{
+                return false;
+            }
+        },
+        isPhone:function(value,massage){
+            var pattr=/1[345678][0-9]{9}]/g;
+            if(!pattr.test(value)){
+                console.log(massage);
+                return true;
+            }else{
+                return false;
+            }
+        },
+        isCarNumber:function(value,massage){
+            var pattr=/^[\u4e00-\u9fa5]{1}[a-zA-Z]{1}[a-zA-Z0-9]{5,6}$/;
+            if(!pattr.test(value)){
+                console.log(massage);
+                return true;
+            }else{
+                return false;
+            }
+        }
+    };
+    var ValidateFun=function(){//添加验证函数
+        var Fun={},obj_arr=[],len1=arguments.length;
+        obj_arr.push.apply(obj_arr,arguments);
+        while(len1--){
+            if(!Fun[obj_arr[len1].type]){
+                Fun[obj_arr[len1].type]=[];
+            }
+            Fun[obj_arr[len1].type].push(ValidateRule[obj_arr[len1].type]);
+        }
+        return function(){//开始验证
+            var type_arr=[],L=0,i;
+            type_arr.push.apply(type_arr,arguments);
+            L=type_arr.length;
+            for(i=0;i<L;i++){
+                var len=Fun[type_arr[i]].length;
+                while(len--){
+                    var beal=Fun[type_arr[i]][len](obj_arr[len].value,obj_arr[len].massage);
+                    if(beal){
+                        Fun[type_arr[i]]=null;
+                        return ;
+                    }
+                }
+            }
+
+        }
+    };
+   var a= ValidateFun({
+        type:'isEmpty',
+        value:'',
+        massage:'11111'
+    },{
+        type:'isEmpty',
+        value:'',
+        massage:'2222'
+    },{
+        type:'isEmpty',
+        value:'nihao',
+        massage:'3333'
+    },{
+       type:'isPhone',
+       value:'56255',
+       massage:'请输入正确的手机号码！'
+   })('isEmpty','isPhone');
+</script>
+</html>
